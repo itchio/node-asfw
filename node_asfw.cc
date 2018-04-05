@@ -1,5 +1,7 @@
 
 #include "node_asfw.h"
+#include <string>
+#include <sstream>
 
 #if defined(WIN32)
 
@@ -13,6 +15,10 @@
 #define BOOL bool
 
 static AllowSetForegroundWindow(DWORD pid) BOOL {
+    return 0;
+}
+
+static GetLastError() DWORD {
     return 0;
 }
 
@@ -30,4 +36,14 @@ NAN_METHOD(AllowSetForegroundWindow) {
     DWORD pid = (DWORD)(maybeArg.FromJust());
     BOOL ret = AllowSetForegroundWindow(pid);
     info.GetReturnValue().Set(ret);
+
+    if (ret == 0) {
+        DWORD lastError = GetLastError();
+        if (lastError != 0) {
+            std::stringstream ss;
+            ss << "Windows error code " << lastError;
+            auto err = ss.str();
+            Nan::ThrowError(err.c_str());
+        }
+    }
 }

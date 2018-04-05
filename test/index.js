@@ -1,8 +1,18 @@
 const test = require("tape");
 const asfw = require("..");
 
-test("can call asfw", function (t) {
-    t.equal(asfw.AllowSetForegroundWindow(0), 0)
+test("invalid PID behavior", function (t) {
+    if (process.platform === "win32") {
+        let threw = false;
+        try {
+            t.equal(asfw.AllowSetForegroundWindow(), 0)
+        } catch (e) {
+            threw = true;
+        }
+        t.equal(threw, true, "should throw");
+    } else {
+        t.equal(asfw.AllowSetForegroundWindow(0), 0)
+    }
     t.end();
 });
 
