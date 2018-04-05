@@ -19,9 +19,9 @@ NAN_METHOD(_SetForegroundWindow) {
     }
 
     HWND hwnd = (HWND)(maybeArg.FromJust());
-    BOOL ret = SetForegroundWindow(hwnd);
-    info.GetReturnValue().Set(ret);
+    ShowWindow(hwnd, SW_RESTORE);
 
+    BOOL ret = SetForegroundWindow(hwnd);
     if (ret == 0) {
         DWORD lastError = GetLastError();
         if (lastError != 0) {
