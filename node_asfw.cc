@@ -36,7 +36,7 @@ NAN_METHOD(_SetForegroundWindow) {
 #else // defined(WIN32)
 
 NAN_METHOD(_SetForegroundWindow) {
-    Nan::ThrowError("SetForegroundWindow is not implemented on this platform")
+    Nan::ThrowError("SetForegroundWindow is not implemented on this platform");
 }
 
 #endif // !defined(WIN32)
