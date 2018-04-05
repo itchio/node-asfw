@@ -37,3 +37,14 @@ test("throws when argument is not a number", function (t) {
     t.equal(threw, true, "should throw")
     t.end();
 });
+
+test("can call SetForegroundWindow", function (t) {
+    let threw = false;
+    try {
+        t.equal(asfw.SetForegroundWindow(0), 0)
+    } catch (e) {
+        threw = true;
+    }
+    t.equal(threw, true, "should throw")
+    t.end();
+})

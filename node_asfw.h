@@ -4,4 +4,5 @@
 
 #include <nan.h>
 
-NAN_METHOD(AllowSetForegroundWindow);
+NAN_METHOD(_AllowSetForegroundWindow);
+NAN_METHOD(_SetForegroundWindow);
