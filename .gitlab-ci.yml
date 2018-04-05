@@ -1,0 +1,36 @@
+
+stages:
+  - test
+
+test-windows-amd64:
+  stage: test
+  tags:
+    - msbuild
+  script:
+    # simply using 'npm i' makes the script stop there.
+    - cmd /c npm i
+    - npm t
+
+test-linux-386:
+  stage: test
+  tags:
+    - docker-capsule-32
+  script:
+    - npm i --unsafe-perm
+    - npm t
+
+test-linux-amd64:
+  stage: test
+  tags:
+    - docker-capsule-64
+  script:
+    - npm i --unsafe-perm
+    - npm t
+
+test-macos-amd64:
+  stage: test
+  tags:
+    - darwin
+  script:
+    - npm i
+    - npm t
